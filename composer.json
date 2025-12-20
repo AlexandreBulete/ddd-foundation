@@ -1,0 +1,29 @@
+{
+    "name": "alexandrebulete/ddd-foundation",
+    "description": "Pure PHP DDD Foundation - Domain, Application, and InMemory infrastructure for building DDD projects",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandre Bulete"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "symfony/uid": "^7.0",
+        "webmozart/assert": "^1.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Alexandrebulete\\DddFoundation\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Alexandrebulete\\DddFoundation\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
+
