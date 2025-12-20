@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alexandrebulete\DddFoundation\Application\Query;
+namespace AlexandreBulete\DddFoundation\Application\Query;
 
 /**
  * @template T

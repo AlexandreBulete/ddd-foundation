@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alexandrebulete\DddFoundation\Domain\ValueObject;
+namespace AlexandreBulete\DddFoundation\Domain\ValueObject;
 
 use Symfony\Component\Uid\Ulid;
 

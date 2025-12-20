@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alexandrebulete\DddFoundation\Domain\Repository;
+namespace AlexandreBulete\DddFoundation\Domain\Repository;
 
-use Alexandrebulete\DddFoundation\Domain\ValueObject\IdentifierVO;
+use AlexandreBulete\DddFoundation\Domain\ValueObject\IdentifierVO;
 
 /**
  * @template T of object

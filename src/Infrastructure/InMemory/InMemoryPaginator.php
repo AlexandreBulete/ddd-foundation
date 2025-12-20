@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alexandrebulete\DddFoundation\Infrastructure\InMemory;
+namespace AlexandreBulete\DddFoundation\Infrastructure\InMemory;
 
-use Alexandrebulete\DddFoundation\Domain\Repository\PaginatorInterface;
+use AlexandreBulete\DddFoundation\Domain\Repository\PaginatorInterface;
 use Webmozart\Assert\Assert;
 
 /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alexandrebulete\DddFoundation\Application\Command;
+namespace AlexandreBulete\DddFoundation\Application\Command;
 
 interface CommandBusInterface
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alexandrebulete\DddFoundation\Domain\Exception;
+namespace AlexandreBulete\DddFoundation\Domain\Exception;
 
-use Alexandrebulete\DddFoundation\Domain\ValueObject\IdentifierVO;
+use AlexandreBulete\DddFoundation\Domain\ValueObject\IdentifierVO;
 
 final class EntityNotFoundException extends \RuntimeException
 {

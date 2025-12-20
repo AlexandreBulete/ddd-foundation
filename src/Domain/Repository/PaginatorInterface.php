@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alexandrebulete\DddFoundation\Domain\Repository;
+namespace AlexandreBulete\DddFoundation\Domain\Repository;
 
 /**
  * @template T of object

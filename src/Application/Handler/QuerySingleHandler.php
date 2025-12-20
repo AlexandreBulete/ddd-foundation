@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Alexandrebulete\DddFoundation\Application\Handler;
+namespace AlexandreBulete\DddFoundation\Application\Handler;
 
-use Alexandrebulete\DddFoundation\Application\Query\QueryInterface;
-use Alexandrebulete\DddFoundation\Domain\Exception\EntityNotFoundException;
-use Alexandrebulete\DddFoundation\Domain\Repository\RepositoryInterface;
+use AlexandreBulete\DddFoundation\Application\Query\QueryInterface;
+use AlexandreBulete\DddFoundation\Domain\Exception\EntityNotFoundException;
+use AlexandreBulete\DddFoundation\Domain\Repository\RepositoryInterface;
 
 /**
  * @template T of object

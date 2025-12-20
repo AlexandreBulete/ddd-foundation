@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Alexandrebulete\\DddFoundation\\": "src/"
+            "AlexandreBulete\\DddFoundation\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Alexandrebulete\\DddFoundation\\Tests\\": "tests/"
+            "AlexandreBulete\\DddFoundation\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable",

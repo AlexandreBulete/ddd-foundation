@@ -46,8 +46,8 @@ src/
 ### Value Objects
 
 ```php
-use Alexandrebulete\DddFoundation\Domain\ValueObject\IdentifierVO;
-use Alexandrebulete\DddFoundation\Domain\ValueObject\StringVO;
+use AlexandreBulete\DddFoundation\Domain\ValueObject\IdentifierVO;
+use AlexandreBulete\DddFoundation\Domain\ValueObject\StringVO;
 
 // Generate a new identifier
 $id = IdentifierVO::generate();
@@ -62,7 +62,7 @@ $title = StringVO::fromString('My Title');
 ### Repository Interface
 
 ```php
-use Alexandrebulete\DddFoundation\Domain\Repository\RepositoryInterface;
+use AlexandreBulete\DddFoundation\Domain\Repository\RepositoryInterface;
 
 class PostRepository implements RepositoryInterface
 {
@@ -73,8 +73,8 @@ class PostRepository implements RepositoryInterface
 ### Command/Query Bus
 
 ```php
-use Alexandrebulete\DddFoundation\Application\Command\CommandInterface;
-use Alexandrebulete\DddFoundation\Application\Command\AsCommandHandler;
+use AlexandreBulete\DddFoundation\Application\Command\CommandInterface;
+use AlexandreBulete\DddFoundation\Application\Command\AsCommandHandler;
 
 // Define a command
 readonly class CreatePostCommand implements CommandInterface
