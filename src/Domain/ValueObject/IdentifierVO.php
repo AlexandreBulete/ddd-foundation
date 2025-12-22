@@ -6,7 +6,7 @@ namespace AlexandreBulete\DddFoundation\Domain\ValueObject;
 
 use Symfony\Component\Uid\Ulid;
 
-readonly class IdentifierVO implements IdentifierInterface
+readonly class IdentifierVO
 {
     final public function __construct(
         protected Ulid $value
@@ -33,14 +33,22 @@ readonly class IdentifierVO implements IdentifierInterface
         return $this->value;
     }
 
+    /**
+     * @deprecated use toRfc4122() instead
+     */
     public function toString(): string
+    {
+        throw new \Exception('toString() is deprecated, use toRfc4122() instead');
+    }
+
+    public function toRfc4122(): string
     {
         return $this->value->toRfc4122();
     }
 
     public function __toString(): string
     {
-        return $this->toString();
+        return $this->toRfc4122();
     }
 
     public function equals(self $other): bool
