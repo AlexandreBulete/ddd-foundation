@@ -1,4 +1,8 @@
-## [1.0.0] - 2025-12-22
+## [1.0.0] - 2025-12-23
+
+### 🚀 Features
+
+- Add email value object
 
 ### 🐛 Bug Fixes
 
@@ -8,3 +12,4 @@
 ### 📚 Documentation
 
 - Add changelogs
+- Update CHANGELOG.md for 1.0.0
