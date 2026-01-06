@@ -18,8 +18,11 @@ src/
 │   ├── Repository/
 │   │   ├── PaginatorInterface.php
 │   │   └── RepositoryInterface.php
+│   ├── Trait/
+│   │   └── AsSelectableEnum.php
 │   └── ValueObject/
 │       ├── DatetimeVO.php
+│       ├── EmailVO.php
 │       ├── IdentifierInterface.php
 │       ├── IdentifierVO.php
 │       └── StringVO.php
@@ -28,6 +31,11 @@ src/
 │   │   ├── AsCommandHandler.php
 │   │   ├── CommandBusInterface.php
 │   │   └── CommandInterface.php
+│   ├── Criteria/
+│   │   ├── CriteriaBuilder.php
+│   │   ├── CriteriaBuilderInterface.php
+│   │   ├── CriteriaNormalizer.php
+│   │   └── CriteriaNormalizerInterface.php
 │   ├── Handler/
 │   │   ├── QueryCollectionHandler.php
 │   │   └── QuerySingleHandler.php
@@ -57,6 +65,39 @@ $id = IdentifierVO::fromString('01HZXYZ...');
 
 // String value object
 $title = StringVO::fromString('My Title');
+```
+
+### AsSelectableEnum Trait
+
+A trait for PHP enums that provides a `choices()` method, useful for form select fields or grid filters:
+
+```php
+use AlexandreBulete\DddFoundation\Domain\Trait\AsSelectableEnum;
+
+enum StatusEnum: string
+{
+    use AsSelectableEnum;
+
+    case DRAFT = 'draft';
+    case PUBLISHED = 'published';
+    case ARCHIVED = 'archived';
+}
+
+// Usage
+StatusEnum::choices();
+// Returns: ['draft' => 'draft', 'published' => 'published', 'archived' => 'archived']
+```
+
+Perfect for Sylius Grid filters or Symfony form choices:
+
+```php
+// Sylius Grid
+->addFilter(SelectFilter::create('status', StatusEnum::choices()))
+
+// Symfony Form
+->add('status', ChoiceType::class, [
+    'choices' => array_flip(StatusEnum::choices()),
+])
 ```
 
 ### Repository Interface
@@ -95,6 +136,89 @@ readonly class CreatePostHandler
     }
 }
 ```
+
+### Criteria System
+
+The Criteria system provides a standardized way to build and normalize query criteria for filtering data. It consists of two main components:
+
+#### CriteriaBuilder
+
+Provides fluent methods to build typed criteria arrays:
+
+```php
+use AlexandreBulete\DddFoundation\Application\Criteria\CriteriaBuilder;
+
+$builder = new CriteriaBuilder();
+
+// Equality
+$builder->eq('status', 'published');      // ['status' => ['type' => 'eq', 'value' => 'published']]
+$builder->neq('status', 'draft');         // ['status' => ['type' => 'neq', 'value' => 'draft']]
+
+// Comparison
+$builder->lt('price', 100);               // ['price' => ['type' => 'lt', 'value' => 100]]
+$builder->lte('price', 100);              // ['price' => ['type' => 'lte', 'value' => 100]]
+$builder->gt('price', 50);                // ['price' => ['type' => 'gt', 'value' => 50]]
+$builder->gte('price', 50);               // ['price' => ['type' => 'gte', 'value' => 50]]
+
+// Collections
+$builder->in('category', ['a', 'b']);     // ['category' => ['type' => 'in', 'value' => ['a', 'b']]]
+$builder->notIn('category', ['c']);       // ['category' => ['type' => 'notIn', 'value' => ['c']]]
+
+// Pattern matching
+$builder->like('title', '%keyword%');     // ['title' => ['type' => 'like', 'value' => '%keyword%']]
+$builder->notLike('title', '%spam%');     // ['title' => ['type' => 'notLike', 'value' => '%spam%']]
+```
+
+#### CriteriaNormalizer
+
+Abstract class to normalize and transform raw criteria before passing them to repositories. Extend this class to add domain-specific normalization logic:
+
+```php
+use AlexandreBulete\DddFoundation\Application\Criteria\CriteriaNormalizer;
+use AlexandreBulete\DddFoundation\Application\Criteria\CriteriaNormalizerInterface;
+
+final readonly class PostCriteriaNormalizer extends CriteriaNormalizer implements CriteriaNormalizerInterface
+{
+    public function normalize(array $criteria): array
+    {
+        // First call parent to drop empty values
+        $criteria = parent::normalize($criteria);
+
+        // Then apply domain-specific transformations
+        $criteria = $this->normalizeStatusCriteria($criteria);
+
+        return $criteria;
+    }
+
+    private function normalizeStatusCriteria(array $criteria): array
+    {
+        $status = $criteria['status'] ?? null;
+
+        if (!is_string($status)) {
+            return $criteria;
+        }
+
+        $now = new \DateTimeImmutable();
+
+        return match ($status) {
+            'published' => $this->mergeCriteria($criteria, [
+                'status' => ['type' => 'eq', 'value' => 'published'],
+                'publishedAt' => ['type' => 'lte', 'value' => $now],
+            ]),
+            'scheduled' => $this->mergeCriteria($criteria, [
+                'status' => ['type' => 'eq', 'value' => 'published'],
+                'publishedAt' => ['type' => 'gt', 'value' => $now],
+            ]),
+            default => $criteria,
+        };
+    }
+}
+```
+
+The base `CriteriaNormalizer` class provides:
+- `normalize(array $criteria): array` - Entry point, drops empty values by default
+- `dropEmptyValues(array $criteria): array` - Removes null or empty string values
+- `mergeCriteria(array $criteria, array $overrides): array` - Merges override criteria into existing criteria
 
 ## Related Packages
 
