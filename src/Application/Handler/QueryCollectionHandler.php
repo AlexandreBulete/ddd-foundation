@@ -6,12 +6,15 @@ namespace AlexandreBulete\DddFoundation\Application\Handler;
 
 use AlexandreBulete\DddFoundation\Application\Query\QueryInterface;
 use AlexandreBulete\DddFoundation\Domain\Repository\RepositoryInterface;
+use AlexandreBulete\DddFoundation\Application\Criteria\CriteriaNormalizerInterface;
 
 abstract readonly class QueryCollectionHandler
 {
     public function __construct(
-        protected RepositoryInterface $repository
+        protected RepositoryInterface $repository,
+        protected ?CriteriaNormalizerInterface $criteriaNormalizer = null
     ) {
+        //
     }
 
     protected function build(QueryInterface $query): RepositoryInterface
@@ -19,7 +22,9 @@ abstract readonly class QueryCollectionHandler
         $repository = $this->repository;
 
         if (!empty($query->criteria)) {
-            $repository = $repository->filter($query->criteria);
+            $repository = $repository->filter(
+                $this->normalize($query->criteria)
+            );
         }
 
         if (null !== $query->page && null !== $query->itemsPerPage) {
@@ -33,6 +38,16 @@ abstract readonly class QueryCollectionHandler
         }
 
         return $repository;
+    }
+
+
+    protected function normalize(array $criteria): array
+    {
+        if (null !== $this->criteriaNormalizer) {
+            return $this->criteriaNormalizer->normalize($criteria);
+        }
+
+        return $criteria;
     }
 }
 
