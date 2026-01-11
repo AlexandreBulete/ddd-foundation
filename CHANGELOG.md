@@ -1,3 +1,15 @@
+## [1.1.0] - 2026-01-11
+
+### 🚀 Features
+
+- Criteria normalizer & builder
+- AsSelectableEnum
+- Implement domain recordEvents logic
+
+### 📚 Documentation
+
+- AsSelectableEnum + Criteria Normalizer+Builder
+- Update CHANGELOG.md for 1.0.0
 ## [1.0.0] - 2025-12-23
 
 ### 🚀 Features
