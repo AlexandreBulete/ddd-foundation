@@ -9,6 +9,7 @@ readonly class DatetimeVO
     final public function __construct(
         protected \DateTimeImmutable $value
     ) {
+        $this->validate($value);
     }
 
     public static function now(): static
@@ -28,6 +29,16 @@ readonly class DatetimeVO
         } catch (\Exception $e) {
             throw new \InvalidArgumentException('Invalid date format: ' . $e->getMessage());
         }
+    }
+
+    protected function validate(\DateTimeImmutable $value): void
+    {
+        // Optional hook to override in subclasses (parity with StringVO).
+    }
+
+    public function equals(self $other): bool
+    {
+        return $this->value == $other->value;
     }
 
     public function value(): \DateTimeImmutable
