@@ -1,3 +1,12 @@
+## [1.1.2] - 2026-07-02
+
+### 🚀 Features
+
+- Validate method to DatetimeVO
+
+### 📚 Documentation
+
+- Update CHANGELOG.md for 1.1.1
 ## [1.1.1] - 2026-02-05
 
 ### 💼 Other
