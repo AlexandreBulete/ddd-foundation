@@ -6,15 +6,27 @@ namespace AlexandreBulete\DddFoundation\Domain\ValueObject;
 
 readonly class StringVO
 {
-    final public function __construct(
-        protected string $value
-    ) {
+    protected string $value;
+
+    final public function __construct(string $value)
+    {
+        $value = $this->normalize($value);
         $this->validate($value);
+        $this->value = $value;
     }
 
     public static function fromString(string $value): static
     {
         return new static($value);
+    }
+
+    /**
+     * Optional hook: canonical form of the value (trim, case…), applied before
+     * validate() — so what is validated is exactly what is stored.
+     */
+    protected function normalize(string $value): string
+    {
+        return $value;
     }
 
     protected function validate(string $value): void

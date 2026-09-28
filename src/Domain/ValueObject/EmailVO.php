@@ -8,11 +8,15 @@ use Webmozart\Assert\Assert;
 
 readonly class EmailVO extends StringVO
 {
+    protected function normalize(string $value): string
+    {
+        return trim($value);
+    }
+
     protected function validate(string $value): void
     {
-        $trimmed = trim($value);
-        Assert::stringNotEmpty($trimmed, 'Email cannot be empty');
-        Assert::email($trimmed, 'Email must be a valid email address');
+        Assert::stringNotEmpty($value, 'Email cannot be empty');
+        Assert::email($value, 'Email must be a valid email address');
     }
 }
 
