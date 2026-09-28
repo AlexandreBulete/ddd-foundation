@@ -14,7 +14,7 @@ use AlexandreBulete\DddFoundation\Domain\ValueObject\IdentifierVO;
 interface RepositoryInterface extends \IteratorAggregate, \Countable
 {
     /**
-     * @return \Iterator<T>
+     * @return \Iterator<array-key, T>
      */
     public function getIterator(): \Iterator;
 
@@ -25,25 +25,14 @@ interface RepositoryInterface extends \IteratorAggregate, \Countable
      */
     public function paginator(): ?PaginatorInterface;
 
-    /**
-     * @return static<T>
-     */
     public function withPagination(int $page, int $itemsPerPage): static;
 
-    /**
-     * @return static<T>
-     */
     public function withoutPagination(): static;
 
-    /**
-     * @return static<T>
-     */
     public function orderBy(string $field, string $direction): static;
 
     /**
      * @param array<string, mixed> $filter
-     *
-     * @return static<T>
      */
     public function filter(array $filter): static;
 
