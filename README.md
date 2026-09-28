@@ -162,11 +162,12 @@ $builder->gte('price', 50);               // ['price' => ['type' => 'gte', 'valu
 
 // Collections
 $builder->in('category', ['a', 'b']);     // ['category' => ['type' => 'in', 'value' => ['a', 'b']]]
-$builder->notIn('category', ['c']);       // ['category' => ['type' => 'notIn', 'value' => ['c']]]
+$builder->notIn('category', ['c']);       // ['category' => ['type' => 'not_in', 'value' => ['c']]]
 
 // Pattern matching
-$builder->like('title', '%keyword%');     // ['title' => ['type' => 'like', 'value' => '%keyword%']]
-$builder->notLike('title', '%spam%');     // ['title' => ['type' => 'notLike', 'value' => '%spam%']]
+$builder->like('title', 'keyword');       // ['title' => ['type' => 'contains', 'value' => 'keyword']]
+$builder->notLike('title', 'spam');       // ['title' => ['type' => 'not_contains', 'value' => 'spam']]
+// Wildcards are added by the repository: pass the bare text.
 ```
 
 #### CriteriaNormalizer
@@ -232,3 +233,15 @@ The base `CriteriaNormalizer` class provides:
 - `alexandrebulete/ddd-apiplatform-bundle` - API Platform bundle for Symfony
 - `alexandrebulete/ddd-sylius-bundle` - Sylius Stack integration
 
+
+## Development
+
+```bash
+composer install
+composer qa          # phpstan (max + strict rules) then phpunit
+```
+
+The in-memory repository is the test double of the Doctrine one
+(`alexandrebulete/ddd-doctrine-bridge`): both implement the same filter
+vocabulary (`Domain\Repository\Comparison`), and the same cases are tested on
+each side.

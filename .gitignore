@@ -1,0 +1,7 @@
+/vendor/
+/composer.lock
+/phpstan.neon
+/.pkg-qa.json
+/.pkg-qa.lock
+/.phpunit.cache/
+/phpunit.xml

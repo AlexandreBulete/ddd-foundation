@@ -8,7 +8,7 @@ use AlexandreBulete\DddFoundation\Domain\Event\DomainEvent;
 
 trait RecordsEvents
 {
-    /** @var DomainEvent[] */
+    /** @var list<DomainEvent> */
     private array $recordedEvents = [];
 
     protected function recordEvent(DomainEvent $event): void
@@ -16,7 +16,7 @@ trait RecordsEvents
         $this->recordedEvents[] = $event;
     }
 
-    /** @return DomainEvent[] */
+    /** @return list<DomainEvent> */
     public function releaseEvents(): array
     {
         $events = $this->recordedEvents;

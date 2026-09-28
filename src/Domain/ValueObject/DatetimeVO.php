@@ -36,9 +36,12 @@ readonly class DatetimeVO
         // Optional hook to override in subclasses (parity with StringVO).
     }
 
+    /**
+     * Same instant, whatever the timezone each side was expressed in.
+     */
     public function equals(self $other): bool
     {
-        return $this->value == $other->value;
+        return $this->value->format('U.u') === $other->value->format('U.u');
     }
 
     public function value(): \DateTimeImmutable
