@@ -1,3 +1,12 @@
+## [1.3.0] - 2026-09-29
+
+### 🚀 Features
+
+- Activity journal contracts
+
+### 📚 Documentation
+
+- Update CHANGELOG.md for 1.2.0
 ## [1.2.0] - 2026-09-28
 
 ### 🚀 Features
