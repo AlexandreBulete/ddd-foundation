@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "symfony/uid": "^7.0 || ^8.0",
         "webmozart/assert": "^1.11"
     },
