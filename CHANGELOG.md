@@ -1,3 +1,12 @@
+## [1.5.0] - 2026-09-29
+
+### 📚 Documentation
+
+- Update CHANGELOG.md for 1.4.0
+
+### ⚙️ Miscellaneous Tasks
+
+- Php 8.4 only
 ## [1.4.0] - 2026-09-29
 
 ### 🚀 Features
