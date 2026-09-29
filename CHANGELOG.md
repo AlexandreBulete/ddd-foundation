@@ -1,3 +1,13 @@
+## [1.4.0] - 2026-09-29
+
+### 🚀 Features
+
+- Permission attribute
+- Build a collection query on a narrowed repository
+
+### 📚 Documentation
+
+- Update CHANGELOG.md for 1.3.0
 ## [1.3.0] - 2026-09-29
 
 ### 🚀 Features
