@@ -30,14 +30,17 @@ abstract readonly class QueryCollectionHandler
     }
 
     /**
-     * @param QueryInterface<mixed> $query
+     * @param QueryInterface<mixed>       $query
+     * @param RepositoryInterface<T>|null $repository a narrowed repository to build
+     *                                                on (a visibility, a scope),
+     *                                                the handler's own otherwise
      *
      * @return RepositoryInterface<T>
      */
-    protected function build(QueryInterface $query): RepositoryInterface
+    protected function build(QueryInterface $query, ?RepositoryInterface $repository = null): RepositoryInterface
     {
         $fields = get_object_vars($query);
-        $repository = $this->repository;
+        $repository ??= $this->repository;
 
         // Normalized even when empty: a normalizer may add default criteria.
         $criteria = $this->normalize(self::stringKeyed($fields['criteria'] ?? [], 'criteria'));
